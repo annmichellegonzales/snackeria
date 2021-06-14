@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+
+<body>
+
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="snackeria" href="/">
+            <i class="fas fa-utensils fa-sm" style="color: var(--super-pink)"></i>
+            Snackeria
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <a class="nav-link" sec:authorize="!isAuthenticated()" href="/sign-up">Sign Up</a>
+            <a class="nav-link" sec:authorize="!isAuthenticated()" href="/login">Log in</a>
+            <a class="nav-link" sec:authorize="isAuthenticated()" href="/dashboard">Profile</a>
+            <a class="nav-link" href="/about">About</a>
+
+            <div sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" th:method="post">
+                    <button class="nav-link bg-transparent border-0">Logout</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>
